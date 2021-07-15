@@ -11,12 +11,18 @@ A few years ago I made a [machine to mix cocktails](https://github.com/Lumorti/d
 
 So here I present the revised version: Sir Mix-a-Lot (no relation). This time it uses just an Arduino for simplicity, only uses four liquids for cost reasons, uses dials to choose the ratios rather than a touchscreen, and the pumps are peristalic meaning they don't need to be gravity fed. All of this housed inside a nice premade box.
 
-### Image
-
 ### Usage
 
 - use the dials to choose the amounts of each of the four liquids
-- then use the button to pour it (stop button in case the glass starts overfilling etc.)
+- then use the button to pour it (stop button in case the glass starts overfilling)
+
+### Photo
+
+[Photo of the fixed machine](photo.jpg)
+
+### Diagram
+
+[Circuit diagram for this project](plan.png)
 
 ### Parts Required
 
@@ -28,6 +34,8 @@ So here I present the revised version: Sir Mix-a-Lot (no relation). This time it
 - 4 peristaltic pumps (12 V)
 - silicon tubing of the same dimension of the pump (I used 3 mm * 5 mm)
 - resistors and jumper cables for general wiring
+
+
 
 ### FUn Combinations Of Four (FUCOFs)
 
