@@ -18,11 +18,11 @@ So here I present the revised version: Sir Mix-a-Lot (no relation). This time it
 
 ### Photo
 
-[Photo of the fixed machine](photo.jpg)
+![Photo of the fixed machine](photo.jpg)
 
 ### Diagram
 
-[Circuit diagram for this project](plan.png)
+![Circuit diagram for this project](plan.png)
 
 ### Parts Required
 
