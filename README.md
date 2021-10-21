@@ -26,9 +26,8 @@ A few years ago I made a [machine to mix cocktails](https://github.com/Lumorti/d
 - silicon tubing of the same dimension of the pump (I used 3 mm * 5 mm)
 - resistors and jumper cables for general wiring
 
+STL models used:
+[Arduino](https://www.thingiverse.com/thing:253463)
+[4 channel relay](https://grabcad.com/library/4-channel-relay-board-1/details?folder_id=1004880)
+[Pump](https://grabcad.com/library/adafruit-peristaltic-pump-arduino-1)
 
-
-### FUn Combinations Of Four (FUCOFs)
-
-- gin, tonic, lemonade, orange juice
-- vodka, whiskey, lemonade, cola

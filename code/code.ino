@@ -1,39 +1,41 @@
 
 // Pin numbers
-int buttonStart = 2;
-int buttonStop = 3;
-int dial1 = A2;
-int dial2 = A3;
-int dial3 = A5;
-int dial4 = A4;
-int opto1 = 13;
-int opto2 = 12;
-int opto3 = 11;
-int opto4 = 10;
+const int buttonPower = 4;
+const int buttonStart = 2;
+const int buttonStop = 3;
+const int dial1 = A2; // blue
+const int dial2 = A3; // green
+const int dial3 = A4; // yellow
+const int dial4 = A5; // orange
+const int opto1 = 8; // blue
+const int opto2 = 9; // green
+const int opto3 = 10; // yellow
+const int opto4 = 11; // orange
 
 // Maxs for the analog values
-int max1 = 685;
-int max2 = 685;
-int max3 = 685;
-int max4 = 685;
+const long max1 = 681;
+const long max2 = 681;
+const long max3 = 681;
+const long max4 = 681;
 
 // How long to pour for max for each valve
-int maxPour1 = 5000;
-int maxPour2 = 5000;
-int maxPour3 = 5000;
-int maxPour4 = 5000;
+// For 3x5 it's approx 80ml / min
+const long maxPour1 = 120000;
+const long maxPour2 = 120000;
+const long maxPour3 = 120000;
+const long maxPour4 = 120000;
 
 // For reading data
-int state1 = 0;
-int state2 = 0;
-int state3 = 0;
-int state4 = 0;
+long state1 = 0;
+long state2 = 0;
+long state3 = 0;
+long state4 = 0;
 
 // Whether the system is doing nothing (0), pouring (1)
 boolean isPouring = false;
 
 // How long to wait between iterations
-int milliPer = 1000;
+int milliPer = 5;
 
 // Runs once at the start
 void setup(){
@@ -51,40 +53,28 @@ void setup(){
   pinMode(opto2, OUTPUT);
   pinMode(opto3, OUTPUT);
   pinMode(opto4, OUTPUT);
-  digitalWrite(opto1, LOW); 
-  digitalWrite(opto2, LOW); 
-  digitalWrite(opto3, LOW); 
-  digitalWrite(opto4, LOW);
-  
-  // For debugging
-  Serial.begin(9600);
+  pinMode(buttonPower, OUTPUT);
+  digitalWrite(opto1, HIGH); 
+  digitalWrite(opto2, HIGH); 
+  digitalWrite(opto3, HIGH); 
+  digitalWrite(opto4, HIGH);
+  digitalWrite(buttonPower, HIGH);
   
 }
 
 // Convert the analog value to milliseconds
-int analogToMilli(int analog, int maxVal, int maxPour){
- return (maxPour * analog) / maxVal; 
+long analogToMilli(int analog, long maxVal, long maxPour) {
+  return (maxPour * analog) / maxVal;
 }
 
 // Runs forever after the setup
-void loop(){
-  
-  Serial.print(isPouring);
-  Serial.print(" ");
-  Serial.print(analogRead(dial1));
-  Serial.print(" ");
-  Serial.print(analogRead(dial2));
-  Serial.print(" ");
-  Serial.print(analogRead(dial3));
-  Serial.print(" ");
-  Serial.print(analogRead(dial4));
-  Serial.println();
+void loop() {
   
   // If not doing anything yet
-  if (!isPouring){
+  if (!isPouring) {
 
     // If the start button is pressed
-    if (digitalRead(buttonStart) == LOW){
+    if (digitalRead(buttonStart) == LOW) {
       
       // Start pouring
       isPouring = true;
@@ -96,10 +86,18 @@ void loop(){
       state4 = analogToMilli(analogRead(dial4), max4, maxPour4);
       
       // Start pouring
-      //digitalWrite(opto1, HIGH); 
-      //digitalWrite(opto2, HIGH); 
-      //digitalWrite(opto3, HIGH); 
-      //digitalWrite(opto4, HIGH); 
+      if (state1 > 0) {
+        digitalWrite(opto1, LOW);
+      } 
+      if (state2 > 0) {
+        digitalWrite(opto2, LOW);
+      }
+      if (state3 > 0) {
+        digitalWrite(opto3, LOW); 
+      }
+      if (state4 > 0) {
+        digitalWrite(opto4, LOW);
+      }
       
     }
     
@@ -107,7 +105,7 @@ void loop(){
   } else {
     
     // If the stop button is pressed
-    if (digitalRead(buttonStop) == LOW){
+    if (digitalRead(buttonStop) == LOW) {
       
       // Stop pouring
       isPouring = false;
@@ -115,53 +113,56 @@ void loop(){
       state2 = 0;
       state3 = 0;
       state4 = 0;
-      //digitalWrite(opto1, LOW); 
-      //digitalWrite(opto2, LOW); 
-      //digitalWrite(opto3, LOW); 
-      //digitalWrite(opto4, LOW); 
+      digitalWrite(opto1, HIGH); 
+      digitalWrite(opto2, HIGH); 
+      digitalWrite(opto3, HIGH); 
+      digitalWrite(opto4, HIGH); 
       
     // Otherwise pour
     } else {
       
       // Check if liquid 1 should keep pouring
-      if (state1 > 0){
+      if (state1 > 0) {
         state1 -= milliPer;
-        if (state1 == 0){
-         //digitalWrite(opto1, LOW); 
+        if (state1 <= 0) {
+          digitalWrite(opto1, HIGH); 
         }
       }
       
       // Check if liquid 2 should keep pouring
-      if (state2 > 0){
+      if (state2 > 0) {
         state2 -= milliPer;
-        if (state2 == 0){
-         //digitalWrite(opto2, LOW); 
+        if (state2 <= 0) {
+          digitalWrite(opto2, HIGH); 
         }
       }
       
       // Check if liquid 3 should keep pouring
-      if (state3 > 0){
+      if (state3 > 0) {
         state3 -= milliPer;
-        if (state3 == 0){
-         //digitalWrite(opto3, LOW); 
+        if (state3 <= 0) {
+          digitalWrite(opto3, HIGH); 
         }
       }
       
       // Check if liquid 5 should keep pouring
-      if (state4 > 0){
+      if (state4 > 0) {
         state4 -= milliPer;
-        if (state4 == 0){
-         //digitalWrite(opto4, LOW); 
+        if (state4 <= 0) {
+          digitalWrite(opto4, HIGH); 
         }
       }
       
       // Once all are finished, stop
-      if (state1 <= 0 && state2 <= 0 && state3 <=0 && state4 <= 0){
+      if (state1 <= 0 && state2 <= 0 && state3 <=0 && state4 <= 0) {
+        
+        // Reset the state
         isPouring = false;
         state1 = 0;
         state2 = 0;
         state3 = 0;
         state4 = 0;
+      
       }
     
     }
