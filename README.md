@@ -1,11 +1,12 @@
-### History
+### Background
 
-A few years ago I made a [machine to mix cocktails](https://github.com/Lumorti/drink-182), but after testing it at a party it didn't work as well as I expected, due to various issues with leakage and the touch screen not working. So here I present the revised version: Sir Mix-a-Lot (no relation). This time it uses just an Arduino for simplicity, only uses four liquids for cost reasons, uses dials to choose the ratios rather than a touchscreen, and the pumps are peristalic meaning they don't need to be gravity fed. All of this housed inside a nice 3D-printed box (to save having to saw all that wood like last time).
+A few years ago I made a [machine to mix cocktails](https://github.com/Lumorti/drink-182), but after testing it at a party it didn't work as well as I expected, due to various issues with leakage and the touch screen not working well. So here I present the revised version: Sir Mix-a-Lot (no relation). This time it uses just an Arduino for simplicity, only uses four liquids for cost reasons, uses dials to choose the ratios rather than a touchscreen, and the pumps are peristalic meaning they don't need to be gravity fed. All of this housed inside a simple cardboard box (to avoid having to saw wood like last time).
 
 ### Usage
 
-- use the dials to choose the amounts of each of the four liquids
-- then use the button to pour it (there's also a stop button just in case)
+- use the dials to choose the amounts of each of the four liquids (between 0 and 180 ml)
+- use the go button to pour it 
+- use the stop button if you want only a partial pour
 
 ### Photo
 
@@ -25,9 +26,4 @@ A few years ago I made a [machine to mix cocktails](https://github.com/Lumorti/d
 - 4 peristaltic pumps (12 V)
 - silicon tubing of the same dimension of the pump (I used 3 mm * 5 mm)
 - resistors and jumper cables for general wiring
-
-STL models used:
-[Arduino](https://www.thingiverse.com/thing:253463)
-[4 channel relay](https://grabcad.com/library/4-channel-relay-board-1/details?folder_id=1004880)
-[Pump](https://grabcad.com/library/adafruit-peristaltic-pump-arduino-1)
 
